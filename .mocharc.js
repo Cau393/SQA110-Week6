@@ -1,0 +1,21 @@
+module.exports = {
+    require: ["mochawesome/register", "./tests/setup.js"],
+    timeout: 30000,
+    parallel: true,
+    jobs: 3,
+    spec: "tests/**/*.spec.js",
+    recursive: true,
+    reporter: "mochawesome",
+    reporterOptions: {
+        reportDir: "mochawesome-report",
+        reportFilename: "mochawesome",
+        reportTitle: "SQA110 Framework Tests",
+        reportPageTitle: "SQA110 Framework Tests",
+        inline: true,
+        charts: true,
+        autoOpen: false,
+        overwrite: true,
+        html: true,
+        json: true,
+    },
+};

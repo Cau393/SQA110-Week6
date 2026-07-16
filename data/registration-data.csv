@@ -1,0 +1,21 @@
+testId,testCase,firstName,lastName,email,password,confirmPassword,expected,expectedError
+REG_VAL01,Valid short names with mixed-case password,Ann,Li,annli,Passw0rd!,Passw0rd!,pass,
+REG_VAL02,Valid hyphenated username slug,Jean,Luc,jean-luc,abc1234,abc1234,pass,
+REG_VAL03,Valid registration with numeric-heavy password,Pat,Ng,patng,1234abcd,1234abcd,pass,
+REG_VAL04,Valid registration with symbol-rich password,Sam,Wu,samwu,P@ss!2024,P@ss!2024,pass,
+REG_VAL05,Valid registration near max username length,Max,User,abcdefghijklmnopqrstuvwxyz1234567890ab,Secure99!,Secure99!,pass,
+REG_EMAIL01,Invalid email shape: missing @ symbol,,,plainaddress,Passw0rd!,Passw0rd!,pass,
+REG_EMAIL02,Invalid email shape: multiple @ symbols,,,a@@b.com,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."
+REG_EMAIL03,Invalid email shape: no domain after @,,,user@,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."
+REG_EMAIL04,Invalid email shape: no TLD,,,user@domain,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."
+REG_EMAIL05,Invalid email shape: spaces in address,,,user name@domain.com,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."
+REG_MISMATCH01,Password mismatch: trailing digit differs,Mismatch,One,mismatch1,Passw0rd!,Passw0rd1!,fail,Passwords do not match.
+REG_MISMATCH02,Password mismatch: case difference only,Mismatch,Two,mismatch2,Passw0rd!,passw0rd!,fail,Passwords do not match.
+REG_MISMATCH03,Password mismatch: completely different confirm value,Mismatch,Three,mismatch3,Passw0rd!,Different1!,fail,Passwords do not match.
+REG_LEN01,Password length boundary: min minus 1 (3 chars),Len,Short,lenshort,abc,abc,fail,Password must be at least 4 characters long.
+REG_LEN02,Password length boundary: minimum (4 chars),Len,Min,lenmin,abcd,abcd,pass,
+REG_LEN03,Password length boundary: long password (65 chars),Len,Long,lenlong,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass,
+REG_REQ01,Missing required field: blank username,,,,Passw0rd!,Passw0rd!,fail,All fields are required.
+REG_REQ02,Missing required field: blank password,Missing,Password,missingpwd,,Passw0rd!,fail,All fields are required.
+REG_SPEC01,Special char in name: apostrophe in first name,O'Brien,Smith,,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."
+REG_SPEC02,Special char in name: accented chars and emoji,José,🎭 Ruiz,,Passw0rd!,Passw0rd!,fail,"Invalid username. Usernames can only contain lowercase letters, numbers, and single hyphens, must be between 3 and 39 characters, and cannot start or end with a hyphen."

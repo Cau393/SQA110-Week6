@@ -1,0 +1,6 @@
+node_modules/
+mochawesome-report/
+screenshots/
+.env
+.DS_Store
+logs/

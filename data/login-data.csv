@@ -1,0 +1,11 @@
+testId,testCase,email,password,expected
+L01,Valid login with registered account,__VALID_EMAIL__,__VALID_PASSWORD__,success
+L02,Valid login with same credentials again,__VALID_EMAIL__,__VALID_PASSWORD__,success
+L03,Invalid password for valid email,__VALID_EMAIL__,WrongPass99,error
+L04,Invalid email with valid password format,notregistered@fake.com,__VALID_PASSWORD__,error
+L05,Invalid email and password,bogus@fake.com,boguspass,error
+L06,Empty username,,somepass,validation
+L07,Empty password,__VALID_EMAIL__,,validation
+L08,SQL injection style email,"' OR '1'='1",hackpass,validation
+L09,Unicode and special characters in credentials,user+tag@test.com,P@ss!#$%,error
+L10,Locked-out user not supported on AE,locked_user@test.com,locked123,error

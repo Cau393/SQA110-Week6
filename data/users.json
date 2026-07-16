@@ -1,0 +1,16 @@
+{
+    "validUser": {
+        "email": "testuser@automationexercise.com",
+        "password": "Test@12345",
+        "note": "Replace with a real registered account on automationexercise.com"
+    },
+    "invalidUser": {
+        "email": "notauser@fake.com",
+        "password": "wrongpassword"
+    },
+    "existingUser": {
+        "name": "Existing User",
+        "email": "testuser@automationexercise.com",
+        "note": "Used for the 'email already exists' signup test — same email as validUser"
+    }
+}

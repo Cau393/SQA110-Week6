@@ -1,0 +1,36 @@
+{
+    "name": "sqa110-ae-framework",
+    "version": "0.1.0",
+    "description": "Selenium + Mocha automation framework for AutomationExercise.com — SQA110",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --parallel --jobs 3 --require mochawesome/register --require ./tests/setup.js --require ./hooks.js --reporter mochawesome --timeout 60000",
+        "test:login": "mocha --no-config 'tests/login.dd.spec.js' --require mochawesome/register --require ./tests/setup.js --reporter mochawesome --timeout 30000",
+        "test:registration": "mocha --no-config 'tests/registration.dd.spec.js' --require mochawesome/register --require ./tests/setup.js --reporter mochawesome --timeout 90000",
+        "test:registration:csv": "DATA_SOURCE=csv npm run test:registration",
+        "test:registration:xlsx": "DATA_SOURCE=xlsx npm run test:registration",
+        "test:headed": "HEADLESS=false npm test",
+        "test:headless": "HEADLESS=true npm test",
+        "test:smoke": "npm test -- --grep @smoke",
+        "test:ci": "HEADLESS=true mocha --parallel --jobs 3 --retries 1 --require mochawesome/register --require ./tests/setup.js --require ./hooks.js --reporter mochawesome --timeout 60000",
+        "test:debug": "mocha 'tests/**/*.spec.js' --timeout 0 --inspect-brk",
+        "report": "open mochawesome-report/mochawesome.html",
+        "clean": "rm -rf mochawesome-report screenshots"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "type": "commonjs",
+    "dependencies": {
+        "csv-parse": "^7.0.1",
+        "dotenv": "^16.3.1",
+        "selenium-webdriver": "^4.43.0",
+        "winston": "^3.19.0",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "chai": "^4.5.0",
+        "mocha": "^10.8.2",
+        "mochawesome": "^7.1.4"
+    }
+}
