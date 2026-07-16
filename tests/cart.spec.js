@@ -42,14 +42,14 @@ describe("Cart page", function () {
         expect(url).to.include("/view_cart");
     });
 
-    it("@smoke should show 0 items when cart is empty (unauthenticated)", async function () {
+    it("@regression should show 0 items when cart is empty (unauthenticated)", async function () {
         await cartPage.open();
         const count = await cartPage.getItemCount();
         logger.info(`Cart item count: ${count}`);
         expect(count).to.equal(0);
     });
 
-    it("should prompt login when proceeding to checkout as a guest", async function () {
+    it("@regression should prompt login when proceeding to checkout as a guest", async function () {
         this.retries(1);
 
         // Empty carts hide the checkout button — add an item first.

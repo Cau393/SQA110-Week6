@@ -29,20 +29,20 @@ describe("Products page", function () {
         expect(names.length).to.be.greaterThan(0);
     });
 
-    it("@smoke should return results when searching for 'Top'", async function () {
+    it("@regression should return results when searching for 'Top'", async function () {
         await productsPage.searchFor("Top");
         const count = await productsPage.getSearchResultCount();
         logger.info(`Search for "Top" returned ${count} result(s)`);
         expect(count).to.be.greaterThan(0);
     });
 
-    it("should navigate to the product detail page when 'View Product' is clicked", async function () {
+    it("@regression should navigate to the product detail page when 'View Product' is clicked", async function () {
         await productsPage.viewFirstProduct();
         const url = await productsPage.getCurrentUrl();
         expect(url).to.include("/product_details/");
     });
 
-    it("should display the product name on the detail page", async function () {
+    it("@regression should display the product name on the detail page", async function () {
         // Navigate directly by ID so the test is deterministic
         await productDetailPage.openById(1);
         const name = await productDetailPage.getProductName();
@@ -50,7 +50,7 @@ describe("Products page", function () {
         expect(name).to.be.a("string").and.have.length.greaterThan(0);
     });
 
-    it("should display the product price on the detail page", async function () {
+    it("@regression should display the product price on the detail page", async function () {
         await productDetailPage.openById(1);
         const price = await productDetailPage.getProductPrice();
         logger.info(`Product 1 price: "${price}"`);

@@ -72,7 +72,7 @@ async function runLoginRow(driver, loginPage, row) {
     await assertExpected(driver, loginPage, row.expected);
 }
 
-describe("Login - Main", function () {
+describe("@regression Login - Main", function () {
     let driver;
     let loginPage;
 
@@ -93,7 +93,7 @@ describe("Login - Main", function () {
     });
 });
 
-describe("Login - Edge Cases", function () {
+describe("@regression Login - Edge Cases", function () {
     let driver;
     let loginPage;
 

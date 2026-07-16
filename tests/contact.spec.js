@@ -27,7 +27,7 @@ describe("Contact Us page", function () {
         expect(heading.toUpperCase()).to.equal("CONTACT US");
     });
 
-    it("should have the correct page URL", async function () {
+    it("@regression should have the correct page URL", async function () {
         const url = await contactUsPage.getCurrentUrl();
         expect(url).to.include("/contact_us");
     });

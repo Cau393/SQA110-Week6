@@ -26,13 +26,13 @@ describe("Home page", function () {
         expect(title).to.equal("Automation Exercise");
     });
 
-    it("@smoke should display featured products on the home page", async function () {
+    it("@regression should display featured products on the home page", async function () {
         const names = await homePage.getFeaturedProductNames();
         logger.info(`Home page shows ${names.length} featured product(s)`);
         expect(names.length).to.be.greaterThan(0);
     });
 
-    it("should show success message after newsletter subscription", async function () {
+    it("@regression should show success message after newsletter subscription", async function () {
         await homePage.subscribeWithEmail("testsubscriber@example.com");
         const msg = await homePage.getSubscriptionSuccessMessage();
         expect(msg).to.include("You have been successfully subscribed!");

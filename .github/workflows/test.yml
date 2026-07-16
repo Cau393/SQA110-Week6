@@ -19,7 +19,19 @@ jobs:
 
             - run: npm ci
 
-            - run: npm run test:ci
+            - name: Run smoke tests
+              run: npm run test:smoke
+              env:
+                  HEADLESS: "true"
+                  BASE_URL: https://automationexercise.com
+                  BROWSER: chrome
+                  DATA_SOURCE: xlsx
+                  TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+                  TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+            - name: Run regression tests
+              if: github.ref == 'refs/heads/main'
+              run: npm run test:regression
               env:
                   HEADLESS: "true"
                   BASE_URL: https://automationexercise.com

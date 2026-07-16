@@ -7,6 +7,7 @@ fs.mkdirSync(logsDir, { recursive: true });
 
 const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 const logFile = path.join(logsDir, `test-run-${timestamp}.log`);
+const logLevel = process.env.LOG_LEVEL || "info";
 
 const logger = winston.createLogger({
     level: "debug",
@@ -15,7 +16,7 @@ const logger = winston.createLogger({
         winston.format.json()
     ),
     transports: [
-        new winston.transports.Console({ level: "info" }),
+        new winston.transports.Console({ level: logLevel }),
         new winston.transports.File({ filename: logFile, level: "debug" }),
     ],
 });

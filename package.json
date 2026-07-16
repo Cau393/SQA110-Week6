@@ -11,9 +11,10 @@
         "test:registration:xlsx": "DATA_SOURCE=xlsx npm run test:registration",
         "test:headed": "HEADLESS=false npm test",
         "test:headless": "HEADLESS=true npm test",
-        "test:smoke": "npm test -- --grep @smoke",
+        "test:smoke": "HEADLESS=true mocha --parallel --jobs 3 --require mochawesome/register --require ./tests/setup.js --require ./hooks.js --reporter mochawesome --grep @smoke --timeout 60000",
+        "test:regression": "HEADLESS=true mocha --parallel --jobs 3 --retries 1 --require mochawesome/register --require ./tests/setup.js --require ./hooks.js --reporter mochawesome --grep @regression --timeout 60000",
         "test:ci": "HEADLESS=true mocha --parallel --jobs 3 --retries 1 --require mochawesome/register --require ./tests/setup.js --require ./hooks.js --reporter mochawesome --timeout 60000",
-        "test:debug": "mocha 'tests/**/*.spec.js' --timeout 0 --inspect-brk",
+        "test:debug": "LOG_LEVEL=debug HEADLESS=true mocha --require ./tests/setup.js --require ./hooks.js --timeout 0",
         "report": "open mochawesome-report/mochawesome.html",
         "clean": "rm -rf mochawesome-report screenshots"
     },

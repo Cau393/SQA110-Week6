@@ -69,7 +69,7 @@ async function assertExpected(driver, page, row) {
     throw new Error(`Unknown expected outcome: ${row.expected}`);
 }
 
-describe("Registration - Main", function () {
+describe("@regression Registration - Main", function () {
     let driver;
     let registrationPage;
 

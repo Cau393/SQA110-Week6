@@ -59,7 +59,7 @@ class CartPage extends BasePage {
             const modalLogin = await this.isCheckoutLoginPromptVisible();
             const url = await this.getCurrentUrl();
             return modalLogin || url.includes("/login");
-        }, timeout);
+        }, timeout, "guest checkout login prompt or /login redirect");
     }
 
     /**
