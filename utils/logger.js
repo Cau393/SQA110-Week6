@@ -20,4 +20,12 @@ const logger = winston.createLogger({
     ],
 });
 
+function maskSecret(str) {
+    if (!str) return str;
+    if (str.length <= 4) return "***";
+    return str.slice(0, 2) + "***" + str.slice(-2);
+}
+
+logger.maskSecret = maskSecret;
 module.exports = logger;
+module.exports.maskSecret = maskSecret;

@@ -38,7 +38,9 @@ class LoginPage extends BasePage {
      * @returns {Promise<void>}
      */
     async login(email, password) {
-        logger.info(`Links to an external site. username: ${email}`);
+        logger.info(
+            `Attempting login for user: ${logger.maskSecret(email)} (password: ${logger.maskSecret(password)})`
+        );
         await this.type(LoginPage.LOGIN_EMAIL, email);
         await this.type(LoginPage.LOGIN_PASSWORD, password);
         await this.click(LoginPage.LOGIN_BUTTON);

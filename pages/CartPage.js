@@ -42,6 +42,27 @@ class CartPage extends BasePage {
     }
 
     /**
+     * Wait until the cart contains at least the given number of items.
+     * @param {number} [minCount=1]
+     * @param {number} [timeout]
+     */
+    async waitForItems(minCount = 1, timeout = this.defaultTimeout) {
+        await this.waitForCount(CartPage.CART_ROWS, minCount, timeout);
+    }
+
+    /**
+     * Wait until guest checkout shows the login prompt modal or redirects to /login.
+     * @param {number} [timeout]
+     */
+    async waitForCheckoutLoginPrompt(timeout = this.defaultTimeout) {
+        await this.waitUntil(async () => {
+            const modalLogin = await this.isCheckoutLoginPromptVisible();
+            const url = await this.getCurrentUrl();
+            return modalLogin || url.includes("/login");
+        }, timeout);
+    }
+
+    /**
      * Whether the cart empty-state message is visible.
      * @returns {Promise<boolean>}
      */

@@ -1,33 +1,19 @@
-const { Builder, By } = require("selenium-webdriver");
-const chrome = require("selenium-webdriver/chrome");
-
-const URL = "https://practice.expandtesting.com/register";
-
-async function createDriver() {
-    const options = new chrome.Options();
-    options.addArguments("--headless=new", "--window-size=1920,1080", "--no-sandbox");
-    return new Builder().forBrowser("chrome").setChromeOptions(options).build();
-}
+const { createDriver } = require("../utils/driver");
+const RegistrationPage = require("../pages/RegistrationPage");
 
 async function submit(driver, { username, password, confirmPassword }) {
-    await driver.get(URL);
-    await driver.findElement(By.css("#username")).clear();
-    await driver.findElement(By.css("#password")).clear();
-    await driver.findElement(By.css("#confirmPassword")).clear();
-    if (username !== undefined) await driver.findElement(By.css("#username")).sendKeys(String(username));
-    if (password !== undefined) await driver.findElement(By.css("#password")).sendKeys(String(password));
-    if (confirmPassword !== undefined) await driver.findElement(By.css("#confirmPassword")).sendKeys(String(confirmPassword));
-    const submit = await driver.findElement(By.css("button[type='submit']"));
-    await driver.executeScript("arguments[0].scrollIntoView({block:'center'});", submit);
-    await driver.executeScript("arguments[0].click();", submit);
-    await driver.sleep(1500);
+    const page = new RegistrationPage(driver);
+    await page.open();
+    await page.register({ username, password, confirmPassword });
+    await page.waitForRegistrationOutcome();
 }
 
 async function getOutcome(driver) {
-    const url = await driver.getCurrentUrl();
+    const page = new RegistrationPage(driver);
+    const url = await page.getCurrentUrl();
     let flash = "";
     try {
-        flash = await driver.findElement(By.css("#flash")).getText();
+        flash = await page.getFlashMessage();
     } catch {
         flash = "";
     }

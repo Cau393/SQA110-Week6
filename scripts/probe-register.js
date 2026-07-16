@@ -12,8 +12,8 @@ async function submit(driver, { username, password, confirmPassword }) {
     const page = new RegistrationPage(driver);
     await page.open();
     await page.register({ username, password, confirmPassword });
-    // Wait for /login redirect (success) or #flash banner (validation error) instead of
-    // a fixed delay — getOutcome() must read the page only after the server responds.
+    // Wait for /login redirect (success) or #flash banner (validation error) via
+    // waitForRegistrationOutcome() — getOutcome() reads the page only after the server responds.
     await page.waitForRegistrationOutcome();
 }
 

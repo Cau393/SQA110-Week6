@@ -57,14 +57,9 @@ describe("Cart page", function () {
         await productDetailPage.addToCart();
         await productDetailPage.viewCartFromModal();
 
-        await driver.wait(async () => (await cartPage.getItemCount()) > 0, 15000);
+        await cartPage.waitForItems(1);
         await cartPage.proceedToCheckout();
-
-        await driver.wait(async () => {
-            const modalLogin = await cartPage.isCheckoutLoginPromptVisible();
-            const url = await cartPage.getCurrentUrl();
-            return modalLogin || url.includes("/login");
-        }, 15000);
+        await cartPage.waitForCheckoutLoginPrompt();
 
         const modalLogin = await cartPage.isCheckoutLoginPromptVisible();
         const url = await cartPage.getCurrentUrl();

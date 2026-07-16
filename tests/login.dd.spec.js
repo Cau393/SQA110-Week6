@@ -36,11 +36,8 @@ async function getLoginErrorSafe(loginPage) {
 
 async function assertExpected(driver, loginPage, expected) {
     if (expected === "success") {
-        await driver.wait(async () => {
-            const url = await driver.getCurrentUrl();
-            return !url.includes("/login");
-        }, config.timeouts.explicit);
-        const url = await driver.getCurrentUrl();
+        await loginPage.waitForUrlNotContains("/login");
+        const url = await loginPage.getCurrentUrl();
         expect(url).to.not.include("/login");
         return;
     }

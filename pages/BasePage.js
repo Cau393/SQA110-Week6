@@ -27,6 +27,35 @@ class BasePage {
         return this.driver.wait(until.urlContains(text), timeout);
     }
 
+    async waitForUrlNotContains(text, timeout = this.defaultTimeout) {
+        return this.driver.wait(async () => {
+            const url = await this.getCurrentUrl();
+            return !url.includes(text);
+        }, timeout);
+    }
+
+    /**
+     * Wait until at least `count` elements match the locator.
+     * @param {import("selenium-webdriver").By} locator
+     * @param {number} count
+     * @param {number} [timeout]
+     */
+    async waitForCount(locator, count, timeout = this.defaultTimeout) {
+        return this.driver.wait(async () => {
+            const elements = await this.driver.findElements(locator);
+            return elements.length >= count;
+        }, timeout);
+    }
+
+    /**
+     * Wait until a custom condition returns true.
+     * @param {() => Promise<boolean>} condition
+     * @param {number} [timeout]
+     */
+    async waitUntil(condition, timeout = this.defaultTimeout) {
+        return this.driver.wait(condition, timeout);
+    }
+
     async findElement(locator) {
         await this.waitForVisible(locator);
         return this.driver.findElement(locator);

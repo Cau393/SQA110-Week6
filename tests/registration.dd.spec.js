@@ -48,21 +48,20 @@ async function getFlashSafe(page) {
 }
 
 async function assertExpected(driver, page, row) {
+    const timeout =
+        row.expected === "pass"
+            ? Math.max(config.timeouts.explicit, 30000)
+            : Math.max(config.timeouts.explicit, 15000);
+    await page.waitForRegistrationOutcome(timeout);
+
     if (row.expected === "pass") {
-        await driver.wait(async () => {
-            const url = await driver.getCurrentUrl();
-            return url.includes("/login");
-        }, Math.max(config.timeouts.explicit, 30000));
+        expect(await page.getCurrentUrl()).to.include("/login");
         const flash = await getFlashSafe(page);
         expect(flash).to.include("Successfully registered");
         return;
     }
 
     if (row.expected === "fail") {
-        await driver.wait(async () => {
-            const flash = await getFlashSafe(page);
-            return flash.length > 0;
-        }, Math.max(config.timeouts.explicit, 15000));
         expect(await getFlashSafe(page)).to.include(String(row.expectedError));
         return;
     }
